@@ -1,0 +1,8 @@
+{
+  "id": "translate",
+  "name": "Translate",
+  "version": "1.0.0",
+  "description": "A Research Helper plugin that translates selected text in PDF reader",
+  "author": "Hunt Feng",
+  "repo": "ResearchHelper/translate"
+}

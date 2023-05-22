@@ -1,0 +1,20 @@
+{
+  "name": "translate",
+  "version": "1.0.0",
+  "description": "A Research Helper plugin that translates selected text in PDF reader",
+  "main": "main.ts",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hunt Feng",
+  "license": "MIT",
+  "dependencies": {
+    "research-helper": "^1.0.0",
+    "translate": "^2.0.2"
+  },
+  "devDependencies": {
+    "builtin-modules": "^3.3.0",
+    "esbuild": "^0.17.19"
+  }
+}

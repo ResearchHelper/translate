@@ -1,0 +1,4 @@
+node_modules
+.vscode
+# we'll publish this later
+main.js
