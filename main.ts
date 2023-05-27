@@ -1,8 +1,10 @@
+import { SettingInput } from "research-helper";
 import { Plugin, Button, View } from "research-helper";
 import translate from "translate";
 
-class MyPlugin extends Plugin {
-  root: HTMLDivElement;
+class Translate extends Plugin {
+  from: string = "en";
+  to: string = "zh";
 
   enable() {
     let button = {
@@ -18,6 +20,38 @@ class MyPlugin extends Plugin {
       onMounted: this.mountView,
     } as View;
     this.registerPDFMenuView(view);
+
+    let fromLangSetting = this.getSettingValue("From language") as
+      | SettingInput
+      | undefined;
+    if (!fromLangSetting) {
+      fromLangSetting = {
+        label: "From language",
+        description: "Translate from which Language?",
+        type: "input",
+        inputType: "text",
+        value: "en",
+      } as SettingInput;
+      this.addSetting(fromLangSetting);
+    } else {
+      this.from = fromLangSetting.value as string;
+    }
+
+    let toLangSetting = this.getSettingValue("To language") as
+      | SettingInput
+      | undefined;
+    if (!toLangSetting) {
+      toLangSetting = {
+        label: "To language",
+        description: "Translate to which Language?",
+        type: "input",
+        inputType: "text",
+        value: "zh",
+      } as SettingInput;
+      this.addSetting(toLangSetting);
+    } else {
+      this.to = toLangSetting.value as string;
+    }
   }
 
   showTranslate() {
@@ -32,9 +66,11 @@ class MyPlugin extends Plugin {
     let hr = document.createElement("hr");
     hr.style.opacity = "0.3";
 
-    translate(divRaw.innerHTML, "zh").then((text) => {
-      divTranslated.innerHTML = text;
-    });
+    translate(divRaw.innerHTML, { from: this.from, to: this.to }).then(
+      (text) => {
+        divTranslated.innerHTML = text;
+      }
+    );
 
     let container = document.createElement("div");
     container.style.margin = "0.5rem";
@@ -47,4 +83,4 @@ class MyPlugin extends Plugin {
   }
 }
 
-export default MyPlugin;
+export default Translate;
